@@ -1,0 +1,107 @@
+a {
+    text-decoration:none;
+}
+a:link {
+    text-decoration:none;
+    color:#000;
+}
+a:visited {
+    text-decoration:none;
+    color:#000;
+}
+a:hover {
+    text-decoration:none;
+    color:#000;
+}
+a:active {
+    text-decoration:none;
+    color:#000;
+}
+html{
+    height:100%;
+}
+body{
+    background-color:#eeeeee;
+    height:100%;
+
+}
+
+/*头部*/
+.header {
+    text-align:center;
+    padding:5px;
+}
+.header div{
+    text-align:right;
+}
+
+#note_top{
+    margin-left: 50px;
+}
+
+
+/*内容*/
+.content{
+    min-height: 95%;
+}
+/*左侧导航栏*/
+.noteList_div_C {
+    line-height:30px;
+    width:300px;
+    float:left;
+    padding:5px;
+}
+
+.noteList_div_C ul{
+    list-style-type:none;
+}
+.noteList_div_C ul a{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display:block;
+    width:200px;
+    height:40px;
+    line-height:40px;
+    background:#eeeeee;
+    border-radius:3px;
+    border:1px solid #e7e7e7;
+    padding:0 15px;
+    margin-bottom:-1px;
+}
+.noteList_div_C ul li:last-child a {
+margin-bottom:0;
+}
+.noteList_div_C ul .active a,ul a:hover {
+background:#f8f8f8;
+}
+
+
+/*内容*/
+.section {
+    width:60%;
+    float:left;
+    padding:10px;
+}
+#note_text_id a {
+    color: #01AAED;
+    text-decoration: none;
+}
+/*底部*/
+.footer {
+    height:3%;
+    min-height: 32px;
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+
+
+
+
+
+
+
+

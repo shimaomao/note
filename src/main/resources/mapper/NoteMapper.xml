@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pangciyuan.note.mapper.NoteMapper">
+  <resultMap id="BaseResultMap" type="com.pangciyuan.note.model.Note">
+    <id column="note_id" jdbcType="INTEGER" property="noteId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="note_title" jdbcType="VARCHAR" property="noteTitle" />
+    <result column="note_book_id" jdbcType="INTEGER" property="noteBookId" />
+    <result column="note_book_tag" jdbcType="VARCHAR" property="noteBookTag" />
+    <result column="note_state" jdbcType="INTEGER" property="noteState" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.pangciyuan.note.model.Note">
+    <result column="note_book_text" jdbcType="LONGVARCHAR" property="noteBookText" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    note_id, user_id, note_title, note_book_id, note_book_tag, note_state, create_time
+  </sql>
+  <sql id="Blob_Column_List">
+    note_book_text
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.pangciyuan.note.model.NoteExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.pangciyuan.note.model.NoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from note_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from note_note
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from note_note
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pangciyuan.note.model.NoteExample">
+    delete from note_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pangciyuan.note.model.Note">
+    insert into note_note (note_id, user_id, note_title, 
+      note_book_id, note_book_tag, note_state, 
+      create_time, note_book_text)
+    values (#{noteId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{noteTitle,jdbcType=VARCHAR}, 
+      #{noteBookId,jdbcType=INTEGER}, #{noteBookTag,jdbcType=VARCHAR}, #{noteState,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{noteBookText,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.pangciyuan.note.model.Note">
+    insert into note_note
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        note_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="noteTitle != null">
+        note_title,
+      </if>
+      <if test="noteBookId != null">
+        note_book_id,
+      </if>
+      <if test="noteBookTag != null">
+        note_book_tag,
+      </if>
+      <if test="noteState != null">
+        note_state,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="noteBookText != null">
+        note_book_text,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noteId != null">
+        #{noteId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="noteTitle != null">
+        #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noteBookId != null">
+        #{noteBookId,jdbcType=INTEGER},
+      </if>
+      <if test="noteBookTag != null">
+        #{noteBookTag,jdbcType=VARCHAR},
+      </if>
+      <if test="noteState != null">
+        #{noteState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noteBookText != null">
+        #{noteBookText,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pangciyuan.note.model.NoteExample" resultType="java.lang.Long">
+    select count(*) from note_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update note_note
+    <set>
+      <if test="record.noteId != null">
+        note_id = #{record.noteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.noteTitle != null">
+        note_title = #{record.noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteBookId != null">
+        note_book_id = #{record.noteBookId,jdbcType=INTEGER},
+      </if>
+      <if test="record.noteBookTag != null">
+        note_book_tag = #{record.noteBookTag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteState != null">
+        note_state = #{record.noteState,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.noteBookText != null">
+        note_book_text = #{record.noteBookText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update note_note
+    set note_id = #{record.noteId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      note_title = #{record.noteTitle,jdbcType=VARCHAR},
+      note_book_id = #{record.noteBookId,jdbcType=INTEGER},
+      note_book_tag = #{record.noteBookTag,jdbcType=VARCHAR},
+      note_state = #{record.noteState,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      note_book_text = #{record.noteBookText,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update note_note
+    set note_id = #{record.noteId,jdbcType=INTEGER},
+      user_id = #{record.userId,jdbcType=INTEGER},
+      note_title = #{record.noteTitle,jdbcType=VARCHAR},
+      note_book_id = #{record.noteBookId,jdbcType=INTEGER},
+      note_book_tag = #{record.noteBookTag,jdbcType=VARCHAR},
+      note_state = #{record.noteState,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pangciyuan.note.model.Note">
+    update note_note
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="noteTitle != null">
+        note_title = #{noteTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="noteBookId != null">
+        note_book_id = #{noteBookId,jdbcType=INTEGER},
+      </if>
+      <if test="noteBookTag != null">
+        note_book_tag = #{noteBookTag,jdbcType=VARCHAR},
+      </if>
+      <if test="noteState != null">
+        note_state = #{noteState,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noteBookText != null">
+        note_book_text = #{noteBookText,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.pangciyuan.note.model.Note">
+    update note_note
+    set user_id = #{userId,jdbcType=INTEGER},
+      note_title = #{noteTitle,jdbcType=VARCHAR},
+      note_book_id = #{noteBookId,jdbcType=INTEGER},
+      note_book_tag = #{noteBookTag,jdbcType=VARCHAR},
+      note_state = #{noteState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      note_book_text = #{noteBookText,jdbcType=LONGVARCHAR}
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pangciyuan.note.model.Note">
+    update note_note
+    set user_id = #{userId,jdbcType=INTEGER},
+      note_title = #{noteTitle,jdbcType=VARCHAR},
+      note_book_id = #{noteBookId,jdbcType=INTEGER},
+      note_book_tag = #{noteBookTag,jdbcType=VARCHAR},
+      note_state = #{noteState,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where note_id = #{noteId,jdbcType=INTEGER}
+  </update>
+</mapper>

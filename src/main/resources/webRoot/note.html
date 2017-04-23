@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的笔记</title>
+    <link href="/note/css/note.css" type="text/css" rel="stylesheet"></head>
+    <link href="/note/js/layui/css/layui.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/note/js/jquery-1.9.0.min.js"></script>
+    <script type="text/javascript" src="/note/js/layui/layui.js"></script>
+    <script type="text/javascript" src="/note/js/base.js"></script>
+    <script type="text/javascript" src="/note/js/note.js"></script>
+
+</head>
+<body>
+<script type="text/javascript" src="/note/js/canvas.nest.min.js" color="0,0,0" opacity="0.7" zindex="-3" count="50"></script>
+<canvas id="c_n17" style="position: fixed; top: 0px; left: 0px; z-index: -3; opacity: 0.7;" width="1324" height="736"></canvas>
+<div class="content">
+    <div class="header">
+        <h1 style="font-size:3em;">次元笔记 <sup>best</sup></h1>
+        <div>
+            <a href="javascript:void(0)" id="userName_B" >admin</a>&nbsp;|
+            <a href="javascript:void(0)" id="signOut_B">退出</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+    </div>
+
+    <div class="layui-tab layui-tab-card" lay-filter="docDemoTabBrief" style="overflow: hidden;border: hidden;box-shadow: none">
+        <ul class="layui-tab-title" id="bookList_B">
+            <button id="addBook" style="float: right;margin-right: 30px;margin-top: 5px;" class="layui-btn layui-btn-normal layui-btn-small">
+                <i class="layui-icon">&#xe654;</i></button>
+            <button id="editBook" style="float: right;margin-right: 5px;margin-top: 5px;" class="layui-btn layui-btn-normal layui-btn-small">
+                <i class="layui-icon">&#xe642;</i></button>
+        </ul>
+        <div class="layui-tab-content" id="bookList_content_B">
+            <div class="layui-tab-item">
+                <div class="noteList_div_C">
+                    <ul class="noteList_ul_B" bookId="'+value.noteBookId+'">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--<div class="noteList_div_C"><ul id="noteList_ul_B"  bookId="'+value.noteBookId+'" ><li>tianjia</li></ul></div><div bookId="'+value.noteBookId+'" class="section"></div>--></div>
+</div>
+<div class="footer">Copyright W3School.com.cn</div>
+<div id="addBook_div_B" style="display: none">
+    <form class="layui-form" action="">
+        <div class="layui-form-item">
+            <label class="layui-form-label">笔记本名称</label>
+            <div class="layui-inline">
+                <input type="text" name="noteBookName" required lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input"></div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="addBook">添加</button></div>
+        </div>
+    </form>
+</div>
+
+<div id="addnote_div_B" style="display: none">
+    <br/>
+    <form class="layui-form" action="">
+        <input id="noteid_B" type="hidden">
+        <div class="layui-form-item">
+            <label class="layui-form-label">笔记标题</label>
+            <div class="layui-input-inline" style="width: 250px;" >
+                <input id="note_title" type="text" name="note_title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">所属笔记本</label>
+            <div class="layui-input-inline" style="width: 250px;" >
+
+                <select id="note_book_id" name="noteBookId" lay-verify="required" lay-search="">
+                    <option value="" selected="selected">笔记本</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">笔记内容</label>
+            <div class="layui-input-inline" style="width: 600px;" >
+                <!--<textarea id="noteBookText" style="display: none;" name="noteBookText"></textarea>-->
+                <iframe name="note_text_ifr_name" id="note_text_ifr" src="edittest.html" width="100%" height="360px;" style="border: none" ></iframe>
+            </div>
+
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="addNote">保存</button>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<div id="edit_book_B" style="display: none">
+    <table class="layui-table" lay-skin="line">
+        <thead>
+        <tr>
+            <th >笔记本名称</th>
+            <th style="width: 40%">操作</th>
+        </tr>
+        </thead>
+        <tbody id="book_table_list">
+
+        </tbody>
+    </table>
+</div>
+
+<div id="edit_user" style="display: none;" >
+    <form class="layui-form" action="">
+        <div class="layui-form-item"  style="margin-top:10px;">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="user_name_B" name="userName" lay-verify="title" autocomplete="off" aria-readonly="true" readonly="true" placeholder="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">单选框</label>
+            <div class="layui-input-block">
+                <input type="radio" name="userSex" value="1" title="男">
+                <input type="radio" name="userSex" value="2" title="女">
+                <input type="radio" name="userSex" value="0" title="默认" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">生日</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="开始日" name="userBirthday" id="user_birthday_B">
+            </div>
+        </div> <div class="layui-form-item">
+            <label class="layui-form-label">年龄</label>
+            <div class="layui-input-inline ">
+                <input type="text" id="user_age_B" name="userAge" lay-verify="number" aria-readonly="true" autocomplete="off" readonly="true" placeholder="" class="layui-input">
+            </div>
+        </div>
+<div class="layui-form-item">
+    <label class="layui-form-label"></label>
+    <div class="layui-input-inline ">
+        <a id="update_password_B" >修改密码</a>
+    </div>
+</div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="update_user_B">保存</button>
+                <!--<button class="layui-btn" id="update_password_B" >修改密码</button>-->
+            </div>
+        </div>
+    </form>
+</div>
+
+<div id="update_password_D" style="display: none;" >
+    <form class="layui-form" action="">
+        <div class="layui-form-item" style="margin-top: 10px;">
+            <label class="layui-form-label">原密码</label>
+            <div class="layui-input-inline ">
+                <input type="password" lay-verify="required" id="old_pwd_I" name="oldPwd" lay-verify="title" autocomplete="off" aria-readonly="true" placeholder="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">新密码</label>
+            <div class="layui-input-inline ">
+                <input type="password" id="new_pwd_I" lay-verify="required" name="newPwd" lay-verify="title" autocomplete="off" aria-readonly="true" placeholder="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">再次输入新密码</label>
+            <div class="layui-input-inline ">
+                <input type="password" id="new_pwd_II" lay-verify="required" lay-verify="title" autocomplete="off" aria-readonly="true" placeholder="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="update_pwd_B">保存</button>
+                <!--<button class="layui-btn" id="update_password_B" >修改密码</button>-->
+            </div>
+        </div>
+    </form></div>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pangciyuan.note.mapper.NoteShareMapper">
+  <resultMap id="BaseResultMap" type="com.pangciyuan.note.model.NoteShare">
+    <id column="note_share_id" jdbcType="INTEGER" property="noteShareId" />
+    <result column="note_id" jdbcType="INTEGER" property="noteId" />
+    <result column="note_share_type" jdbcType="INTEGER" property="noteShareType" />
+    <result column="note_share_uri" jdbcType="VARCHAR" property="noteShareUri" />
+    <result column="note_share_start" jdbcType="INTEGER" property="noteShareStart" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    note_share_id, note_id, note_share_type, note_share_uri, note_share_start, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.pangciyuan.note.model.NoteShareExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from note_note_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from note_note_share
+    where note_share_id = #{noteShareId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from note_note_share
+    where note_share_id = #{noteShareId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.pangciyuan.note.model.NoteShareExample">
+    delete from note_note_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.pangciyuan.note.model.NoteShare">
+    insert into note_note_share (note_share_id, note_id, note_share_type, 
+      note_share_uri, note_share_start, create_time
+      )
+    values (#{noteShareId,jdbcType=INTEGER}, #{noteId,jdbcType=INTEGER}, #{noteShareType,jdbcType=INTEGER}, 
+      #{noteShareUri,jdbcType=VARCHAR}, #{noteShareStart,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.pangciyuan.note.model.NoteShare">
+    insert into note_note_share
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noteShareId != null">
+        note_share_id,
+      </if>
+      <if test="noteId != null">
+        note_id,
+      </if>
+      <if test="noteShareType != null">
+        note_share_type,
+      </if>
+      <if test="noteShareUri != null">
+        note_share_uri,
+      </if>
+      <if test="noteShareStart != null">
+        note_share_start,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noteShareId != null">
+        #{noteShareId,jdbcType=INTEGER},
+      </if>
+      <if test="noteId != null">
+        #{noteId,jdbcType=INTEGER},
+      </if>
+      <if test="noteShareType != null">
+        #{noteShareType,jdbcType=INTEGER},
+      </if>
+      <if test="noteShareUri != null">
+        #{noteShareUri,jdbcType=VARCHAR},
+      </if>
+      <if test="noteShareStart != null">
+        #{noteShareStart,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.pangciyuan.note.model.NoteShareExample" resultType="java.lang.Long">
+    select count(*) from note_note_share
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update note_note_share
+    <set>
+      <if test="record.noteShareId != null">
+        note_share_id = #{record.noteShareId,jdbcType=INTEGER},
+      </if>
+      <if test="record.noteId != null">
+        note_id = #{record.noteId,jdbcType=INTEGER},
+      </if>
+      <if test="record.noteShareType != null">
+        note_share_type = #{record.noteShareType,jdbcType=INTEGER},
+      </if>
+      <if test="record.noteShareUri != null">
+        note_share_uri = #{record.noteShareUri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.noteShareStart != null">
+        note_share_start = #{record.noteShareStart,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update note_note_share
+    set note_share_id = #{record.noteShareId,jdbcType=INTEGER},
+      note_id = #{record.noteId,jdbcType=INTEGER},
+      note_share_type = #{record.noteShareType,jdbcType=INTEGER},
+      note_share_uri = #{record.noteShareUri,jdbcType=VARCHAR},
+      note_share_start = #{record.noteShareStart,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.pangciyuan.note.model.NoteShare">
+    update note_note_share
+    <set>
+      <if test="noteId != null">
+        note_id = #{noteId,jdbcType=INTEGER},
+      </if>
+      <if test="noteShareType != null">
+        note_share_type = #{noteShareType,jdbcType=INTEGER},
+      </if>
+      <if test="noteShareUri != null">
+        note_share_uri = #{noteShareUri,jdbcType=VARCHAR},
+      </if>
+      <if test="noteShareStart != null">
+        note_share_start = #{noteShareStart,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where note_share_id = #{noteShareId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.pangciyuan.note.model.NoteShare">
+    update note_note_share
+    set note_id = #{noteId,jdbcType=INTEGER},
+      note_share_type = #{noteShareType,jdbcType=INTEGER},
+      note_share_uri = #{noteShareUri,jdbcType=VARCHAR},
+      note_share_start = #{noteShareStart,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where note_share_id = #{noteShareId,jdbcType=INTEGER}
+  </update>
+</mapper>
