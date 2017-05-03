@@ -65,6 +65,13 @@ public class ApiRouter {
 		router.patch(Constants.NOTE).handler(noteFacade::updateNote);
 		/** 删除笔记 */
 		router.delete(Constants.NOTE_DELETE).handler(noteFacade::deleteNote);
+		/** 分享笔记*/
+		router.post(Constants.SHARE_NOTE).handler(noteFacade::shareNote);
+
+		/** 查看分享*/
+		router.get(Constants.S_S).handler(noteFacade::getShare);
+		/** 获取笔记*/
+		router.post(Constants.S_S).handler(noteFacade::getShareNote);
 
 		// router.get("/test/sse").handler(context -> {
 		// SSEResponse.setResponse(context.response());

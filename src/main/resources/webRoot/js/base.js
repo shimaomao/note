@@ -69,3 +69,11 @@ function jsGetAge(strBirthday) {
     return returnAge;
 
 }
+
+function getLastPartOfUrl(url) {
+    if (!url)
+        return "";
+    if (url.lastIndexOf("/") == url.length - 1)
+        url = url.substring(0, url.length - 1);
+    return url.substring(url.lastIndexOf("/") + 1);
+}

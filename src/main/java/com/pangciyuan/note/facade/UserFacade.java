@@ -54,7 +54,7 @@ public class UserFacade {
 	public void getUserSign(RoutingContext context) {
 		Session session = context.session();
 		Integer userId = session.get("userId");
-//		userId = 5;
+//		userId = 12;
 		if (userId == null)
 			Send.send(context, new Reslut(false));
 		else

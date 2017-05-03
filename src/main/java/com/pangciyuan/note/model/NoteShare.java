@@ -16,6 +16,10 @@ public class NoteShare implements Serializable {
 
     private Date createTime;
 
+    private String sharePin;
+
+    private Integer userId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getNoteShareId() {
@@ -64,5 +68,21 @@ public class NoteShare implements Serializable {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getSharePin() {
+        return sharePin;
+    }
+
+    public void setSharePin(String sharePin) {
+        this.sharePin = sharePin == null ? null : sharePin.trim();
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

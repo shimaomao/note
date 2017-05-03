@@ -55,5 +55,10 @@ public class Constants {
 	public static final String NOTE = "/notej/note";
 	// 删除笔记
 	public static final String NOTE_DELETE = "/notej/note/:noteId";
+	//分享笔记
+	public static final String SHARE_NOTE = "/notej/note/:noteId/share";
+	//查看分享
+	public static final String S_S = "/s/:uri";
+
 
 }

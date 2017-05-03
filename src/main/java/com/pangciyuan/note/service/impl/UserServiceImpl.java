@@ -68,13 +68,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Reslut getUserById(Integer userId) {
-        // userId =5;
+//         userId =12;
         return new Reslut(userInfoMapper.selectByPrimaryKey(userId));
     }
 
     @Override
     public Reslut updateUserById(UserInfo user) {
-        // user.setUserId(5);
+//         user.setUserId(12);
         return new Reslut(userInfoMapper.updateByPrimaryKeySelective(user));
     }
 

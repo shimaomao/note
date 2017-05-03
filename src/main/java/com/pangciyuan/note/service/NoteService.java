@@ -1,5 +1,6 @@
 package com.pangciyuan.note.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pangciyuan.note.model.Note;
 import com.pangciyuan.note.model.NoteBook;
 import com.pangciyuan.note.vertx.Reslut;
@@ -32,5 +33,11 @@ public interface NoteService {
 	Reslut updateNote(Note note);
 
 	Reslut deleteNote(String noteId);
+
+	Reslut shareNote(String noteId,JSONObject data);
+
+	Reslut getShareNote(String uri);
+
+	Reslut getShareNote(String uri , String pin);
 
 }

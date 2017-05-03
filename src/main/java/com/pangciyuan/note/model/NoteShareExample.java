@@ -474,6 +474,136 @@ public class NoteShareExample {
             addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
+
+        public Criteria andSharePinIsNull() {
+            addCriterion("share_pin is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinIsNotNull() {
+            addCriterion("share_pin is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinEqualTo(String value) {
+            addCriterion("share_pin =", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinNotEqualTo(String value) {
+            addCriterion("share_pin <>", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinGreaterThan(String value) {
+            addCriterion("share_pin >", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinGreaterThanOrEqualTo(String value) {
+            addCriterion("share_pin >=", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinLessThan(String value) {
+            addCriterion("share_pin <", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinLessThanOrEqualTo(String value) {
+            addCriterion("share_pin <=", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinLike(String value) {
+            addCriterion("share_pin like", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinNotLike(String value) {
+            addCriterion("share_pin not like", value, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinIn(List<String> values) {
+            addCriterion("share_pin in", values, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinNotIn(List<String> values) {
+            addCriterion("share_pin not in", values, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinBetween(String value1, String value2) {
+            addCriterion("share_pin between", value1, value2, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andSharePinNotBetween(String value1, String value2) {
+            addCriterion("share_pin not between", value1, value2, "sharePin");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNull() {
+            addCriterion("user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIsNotNull() {
+            addCriterion("user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdEqualTo(Integer value) {
+            addCriterion("user_id =", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotEqualTo(Integer value) {
+            addCriterion("user_id <>", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThan(Integer value) {
+            addCriterion("user_id >", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("user_id >=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThan(Integer value) {
+            addCriterion("user_id <", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("user_id <=", value, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdIn(List<Integer> values) {
+            addCriterion("user_id in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotIn(List<Integer> values) {
+            addCriterion("user_id not in", values, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("user_id between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

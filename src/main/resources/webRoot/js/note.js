@@ -98,7 +98,60 @@ function signOut(){
 function getNoteText(){
     return noteText;
 }
+function shareNote(noteId, data) {
+    var res;
+    $.ajax({
+        url: '/notej/note/' + noteId + '/share',
+        type: 'post',
+        data: data,
+        async: false,
+        success: function (data) {
+            res = data;
+        }
+    });
+    return res;
+}
+
 function editNote() {
+
+    $("#share_note").click(function () {
+        var noteId = $(this).attr('note_id');
+        layer.confirm('分享笔记', {
+            shadeClose: true,
+            time: 0 //不自动关闭
+            , btn: ['私密分享', '公开分享']
+
+        }, function (index) {
+            layer.prompt({title: '输入口令，不输入将默认随机口令', formType: 1,allowBlank: true}, function (val, index2) {
+                //layer.msg('得到了'+val);
+                if (val.length > 8) {
+                    layer.msg("pin码不能超过8位");
+                    return;
+                }
+                layer.close(index2);
+                layer.close(index);
+                var data = '{"pin":"' + val + '","type":1}';
+                var res = shareNote(noteId, data);
+                layer.alert("分享地址：" + res.data.uri + (res.data.pin != '' ? "</br>PIN码：" + res.data.pin : ""), {
+                    icon: 6,
+                    title: "分享成功",
+                    area: ['400px']
+                });
+
+            });
+        }, function (index) {
+            //layer.alert('见到你真的很高兴', {icon: 6});
+            //layer.close(index);
+            var data = '{"type":0}';
+            var res = shareNote(noteId, data);
+            layer.alert("分享地址：" + res.data.uri + (res.data.pin != '' ? "</br>PIN码：" + res.data.pin : ""), {
+                icon: 6,
+                title: "分享成功",
+                area: ['400px']
+            });
+        });
+    });
+
     $('#del_note').click(function() {
         var noteId = $(this).attr('note_id');
         layer.msg('确定要删除笔记吗？', {
@@ -279,7 +332,7 @@ function init() {
                     //data.field.noteBookText = layedit.getContent(noteEdit);
                     //layer.msg( note_text_ifr_name.window.getnoteEdit());
                     data.field.noteBookText = note_text_ifr_name.window.getnoteEdit();
-                    var noteid = $("#noteid_B").val()
+                    var noteid = $("#noteid_B").val();
                     if(!noteid) {
                         $.post('/notej/note', JSON.stringify(data.field),
                             function (result) {
@@ -518,10 +571,10 @@ function bookList(data) {
     $.each(data,
         function(index, value) {
             $("#addBook").before('<li class="book_BLI" bookId="' + value.noteBookId + '" ><a href="javascript:void(0)">' + value.noteBookName + '</a></li>');
-            $("#bookList_content_B").append('<div class="layui-tab-item"><div class="noteList_div_C"><ul class="noteList_ul_B"bookId="' + value.noteBookId + '"><li class="add_note_C" bookId="' + value.noteBookId + '" ><a href="javascript:void(0)">添加</a></li></ul></div></div>');
+            $("#bookList_content_B").append('<div class="layui-tab-item"><div class="noteList_div_C"><ul class="noteList_ul_B"bookId="' + value.noteBookId + '"><li class="add_note_C" bookId="' + value.noteBookId + '" ><a href="javascript:void(0)">添加新笔记</a></li></ul></div></div>');
             $("#note_book_id").append('<option value="' + value.noteBookId + '">' + value.noteBookName + '</option>');
         });
-    $("#bookList_content_B").after('<fieldset class="layui-elem-field">' + '<div id="note_top" style="display: none" >添加时间 <span id="note_createtime" style="margin-right: 200px;">2017年04月03日</span> ' + ' <button note_id="" id="edit_note" class="layui-btn layui-btn-mini edit_note"> <i class="layui-icon"></i> </button> ' + '<button note_id="" id="del_note" class="layui-btn layui-btn-mini del_note"> <i class="layui-icon">&#xe640;</i> </button></div>' + ' <legend id="note_title_B">' + noteTitle_def + '</legend> <div id="note_text_id" class="layui-field-box"> ' + notetxt_def + '</div></fieldset>');
+    $("#bookList_content_B").after('<fieldset class="layui-elem-field">' + '<div id="note_top" style="display: none" >添加时间 <span id="note_createtime" style="margin-right: 200px;">2017年04月03日</span> ' + ' <button note_id="" id="edit_note" class="layui-btn layui-btn-mini edit_note"> <i class="layui-icon"></i> </button> ' + '<button note_id="" id="del_note" class="layui-btn layui-btn-mini del_note"> <i class="layui-icon">&#xe640;</i> </button><button note_id="" id="share_note" class="layui-btn layui-btn-mini del_note"> <i class="layui-icon">&#xe641;</i> </button></div>' + ' <legend id="note_title_B">' + noteTitle_def + '</legend> <div id="note_text_id" class="layui-field-box"> ' + notetxt_def + '</div></fieldset>');
 
 }
 
@@ -538,6 +591,7 @@ function showNote() {
                         $("#note_text_id").html('');
                         $("#note_text_id").html(v.noteBookText);
                         $("#edit_note").attr("note_id", v.noteId);
+                        $("#share_note").attr("note_id", v.noteId);
                         $("#del_note").attr("note_id", v.noteId);
                     }
                 })

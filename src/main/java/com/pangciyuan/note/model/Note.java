@@ -26,71 +26,63 @@ public class Note implements Serializable {
         return noteId;
     }
 
-    public Note setNoteId(Integer noteId) {
+    public void setNoteId(Integer noteId) {
         this.noteId = noteId;
-        return this;
     }
 
     public Integer getUserId() {
         return userId;
     }
 
-    public Note setUserId(Integer userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
-        return this;
     }
 
     public String getNoteTitle() {
         return noteTitle;
     }
 
-    public Note setNoteTitle(String noteTitle) {
+    public void setNoteTitle(String noteTitle) {
         this.noteTitle = noteTitle == null ? null : noteTitle.trim();
-        return this;
     }
 
     public Integer getNoteBookId() {
         return noteBookId;
     }
 
-    public Note setNoteBookId(Integer noteBookId) {
+    public void setNoteBookId(Integer noteBookId) {
         this.noteBookId = noteBookId;
-        return this;
     }
 
     public String getNoteBookTag() {
         return noteBookTag;
     }
 
-    public Note setNoteBookTag(String noteBookTag) {
+    public void setNoteBookTag(String noteBookTag) {
         this.noteBookTag = noteBookTag == null ? null : noteBookTag.trim();
-        return this;
     }
 
     public Integer getNoteState() {
         return noteState;
     }
 
-    public Note setNoteState(Integer noteState) {
+    public void setNoteState(Integer noteState) {
         this.noteState = noteState;
-        return this;
     }
 
     public Date getCreateTime() {
         return createTime;
     }
 
-    public Note setCreateTime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-        return this;
     }
 
     public String getNoteBookText() {
         return noteBookText;
     }
 
-    public Note setNoteBookText(String noteBookText) {
+    public void setNoteBookText(String noteBookText) {
         this.noteBookText = noteBookText == null ? null : noteBookText.trim();
-        return this;
     }
 }

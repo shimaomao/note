@@ -17,7 +17,14 @@ public enum ReslutEnum {
 	 * 登录失败,用户名或密码错误
 	 */
 	LOGIN_ERROR(4102, "登录失败,用户名或密码错误"),
-
+	/**
+	 *
+	 */
+	PIN_ERROR(4103,"PIN码输入错误"),
+	/**
+	 * 404
+	 */
+	NOT_FOUND(4004,"Not Found")
 	;
 
 	// 成员变量

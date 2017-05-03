@@ -8,6 +8,8 @@
     <result column="note_share_uri" jdbcType="VARCHAR" property="noteShareUri" />
     <result column="note_share_start" jdbcType="INTEGER" property="noteShareStart" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="share_pin" jdbcType="VARCHAR" property="sharePin" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +70,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    note_share_id, note_id, note_share_type, note_share_uri, note_share_start, create_time
+    note_share_id, note_id, note_share_type, note_share_uri, note_share_start, create_time, 
+    share_pin, user_id
   </sql>
   <select id="selectByExample" parameterType="com.pangciyuan.note.model.NoteShareExample" resultMap="BaseResultMap">
     select
@@ -102,11 +105,11 @@
   </delete>
   <insert id="insert" parameterType="com.pangciyuan.note.model.NoteShare">
     insert into note_note_share (note_share_id, note_id, note_share_type, 
-      note_share_uri, note_share_start, create_time
-      )
+      note_share_uri, note_share_start, create_time, 
+      share_pin, user_id)
     values (#{noteShareId,jdbcType=INTEGER}, #{noteId,jdbcType=INTEGER}, #{noteShareType,jdbcType=INTEGER}, 
-      #{noteShareUri,jdbcType=VARCHAR}, #{noteShareStart,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
+      #{noteShareUri,jdbcType=VARCHAR}, #{noteShareStart,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{sharePin,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.pangciyuan.note.model.NoteShare">
     insert into note_note_share
@@ -129,6 +132,12 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="sharePin != null">
+        share_pin,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="noteShareId != null">
@@ -148,6 +157,12 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sharePin != null">
+        #{sharePin,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -178,6 +193,12 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.sharePin != null">
+        share_pin = #{record.sharePin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userId != null">
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -190,7 +211,9 @@
       note_share_type = #{record.noteShareType,jdbcType=INTEGER},
       note_share_uri = #{record.noteShareUri,jdbcType=VARCHAR},
       note_share_start = #{record.noteShareStart,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      share_pin = #{record.sharePin,jdbcType=VARCHAR},
+      user_id = #{record.userId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,6 +236,12 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="sharePin != null">
+        share_pin = #{sharePin,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
     </set>
     where note_share_id = #{noteShareId,jdbcType=INTEGER}
   </update>
@@ -222,7 +251,9 @@
       note_share_type = #{noteShareType,jdbcType=INTEGER},
       note_share_uri = #{noteShareUri,jdbcType=VARCHAR},
       note_share_start = #{noteShareStart,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      share_pin = #{sharePin,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER}
     where note_share_id = #{noteShareId,jdbcType=INTEGER}
   </update>
 </mapper>
